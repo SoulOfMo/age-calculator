@@ -1,0 +1,19 @@
+$light-red: hsl(0, 100%, 67%);
+$purple: hsl(259, 100%, 65%);
+/* Neutral Colors */
+$off-white: hsl(0, 0%, 94%);
+$white: hsl(0, 0%, 100%);
+$light-grey: hsl(0, 0%, 86%);
+$smokey-grey: hsl(0, 1%, 44%);
+$off-lack: hsl(0, 0%, 8%);
+// Font
+$ff: "Poppins", sans-serif;
+$ff-sm: 400;
+$ff-md: 700;
+$ff-lg: 800;
+$ff-style: italic;
+$box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+
+.hidden {
+  display: none;
+}

@@ -1,0 +1,58 @@
+form {
+  display: flex;
+  position: relative;
+  gap: 2rem;
+  padding-bottom: 3rem;
+  border-bottom: 2px solid $light-grey;
+  color: $smokey-grey;
+  label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    font-weight: $ff-md;
+  }
+  input {
+    padding: 1rem 1.5rem;
+    font-size: 2.5rem;
+    font-weight: $ff-md;
+    width: 11rem;
+    height: 5rem;
+    border: 1px solid $light-grey;
+    border-radius: 0.7rem;
+    outline: none;
+    &:is(:active, :focus) {
+      border: 2px solid $purple;
+      cursor: pointer;
+      color: $off-lack;
+    }
+  }
+  button {
+    position: absolute;
+    right: 0rem;
+    top: 7rem;
+    border-radius: 50%;
+    background-color: $purple;
+    border: none;
+    padding: 1rem;
+    &:is(:active, :hover) {
+      background-color: $off-lack;
+      cursor: pointer;
+    }
+    svg {
+      width: 50%;
+      margin: auto;
+    }
+  }
+
+  .error {
+    margin-top: 0.3rem;
+    color: $light-red;
+    font-size: 0.9rem;
+    text-transform: none;
+    font-style: italic;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+}

@@ -1,0 +1,16 @@
+.results {
+  margin-top: 5rem;
+  font-size: 7rem;
+  color: $off-lack;
+  font-weight: $ff-lg;
+  font-style: italic;
+  & .day,
+  .month,
+  .year {
+    margin-top: -3rem;
+  }
+  text-transform: lowercase;
+  span {
+    color: $purple;
+  }
+}
