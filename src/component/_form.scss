@@ -5,6 +5,7 @@ form {
   padding-bottom: 3rem;
   border-bottom: 2px solid $light-grey;
   color: $smokey-grey;
+  overflow: hidden;
   label {
     display: flex;
     flex-direction: column;
