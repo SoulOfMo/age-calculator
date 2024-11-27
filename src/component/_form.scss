@@ -54,5 +54,9 @@ form {
     font-style: italic;
     letter-spacing: 0;
     font-weight: 400;
+    opacity: 0;
+  }
+  .show {
+    opacity: 100;
   }
 }

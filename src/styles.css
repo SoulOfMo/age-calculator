@@ -125,6 +125,10 @@ form .error {
   font-style: italic;
   letter-spacing: 0;
   font-weight: 400;
+  opacity: 0;
+}
+form .show {
+  opacity: 100;
 }
 
 .results {

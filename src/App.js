@@ -5,7 +5,7 @@ export default function App() {
   const [monthResult, setMonthResult] = useState("--");
   const [dayResult, setDayResult] = useState("--");
 
-  function HandleYearResult(yearResult, monthResult, dayResult) {
+  function handleResult(yearResult, monthResult, dayResult) {
     setYearResult(yearResult);
     setMonthResult(monthResult);
     setDayResult(dayResult);
@@ -13,7 +13,12 @@ export default function App() {
 
   return (
     <main className="container">
-      <Form onYearResult={HandleYearResult} />
+      <Form
+        onResult={handleResult}
+        setYearResult={setYearResult}
+        setMonthResult={setMonthResult}
+        setDayResult={setDayResult}
+      />
       <Result
         yearResult={yearResult}
         monthResult={monthResult}
@@ -23,38 +28,67 @@ export default function App() {
   );
 }
 
-function Form({ onYearResult }) {
-  // const [check, setCheck] = useState(true);
+function Form({ onResult, setYearResult, setMonthResult, setDayResult }) {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
-
   const [day, setDay] = useState("");
+  const [emptyError, setEmptyError] = useState(false);
 
+  //Submitting the form
   const handleCheck = function (e) {
     e.preventDefault();
-    console.log(year, month, day);
-    const date = new Date(year, month - 1, day);
+    console.log(emptyError);
+    setEmptyError(() => year === "" || month === "" || day === "");
+
+    console.log(emptyError);
+    if (year === "" || month === "" || day === "") {
+      return;
+    }
+
+    const birthDate = new Date(year, month - 1, day);
     const currentDate = new Date();
-    const BirthdayDate = Math.floor(
-      (currentDate - date) / (1000 * 60 * 60 * 24 * 365.35)
-    );
-    const monthResult = Math.floor(currentDate.getMonth() - date.getMonth());
-    const dayResult = Math.floor(currentDate.getDate() - date.getDate());
-    console.log(
-      date,
-      date.getDate() === parseInt(day, 10),
-      date.getMonth() === month - 1,
-      date.getFullYear() === parseInt(year, 10)
-    );
+    if (birthDate > currentDate) {
+      setYearResult(() => "--");
+      setMonthResult(() => "--");
+      setDayResult(() => "--");
+      return console.log("error");
+    }
+
+    //Continue from here
+    let yearResult = currentDate.getFullYear() - birthDate.getFullYear();
+    let monthResult = currentDate.getMonth() - birthDate.getMonth();
+    //
+    if (monthResult < 0) {
+      yearResult--;
+      monthResult += 12;
+    }
+
+    // Calculating Month and Days
+    let dayResult = currentDate.getDate() - birthDate.getDate();
+    if (dayResult < 0) {
+      let lastMonth = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        0
+      );
+
+      dayResult += lastMonth.getDate();
+      monthResult--;
+      if (monthResult < 0) {
+        yearResult--;
+        monthResult += 12;
+      }
+    }
+
     const okay =
-      date.getFullYear() === parseInt(year, 10) &&
-      date.getMonth() === month - 1 &&
-      date.getDate() === parseInt(day, 10)
-        ? ("valid ", BirthdayDate)
+      birthDate.getFullYear() === parseInt(year, 10) &&
+      birthDate.getMonth() === month - 1 &&
+      birthDate.getDate() === parseInt(day, 10)
+        ? ("valid ", yearResult)
         : "7";
 
     console.log("hello", okay);
-    onYearResult(BirthdayDate, monthResult, dayResult);
+    onResult(yearResult, monthResult, dayResult);
   };
 
   return (
@@ -64,34 +98,39 @@ function Form({ onYearResult }) {
         <input
           className="no-spinners"
           type="number"
-          maxLength={2}
           placeholder="DD"
           value={day}
           onChange={(e) => setDay(Number(e.target.value))}
         ></input>
-        <span className="error hidden">This field is required</span>
+        <span className={`error ${emptyError ? "show" : "hidden"}`}>
+          This field is required
+        </span>
       </label>
       <label>
         Month
         <input
           className="no-spinners"
           type="number"
-          maxLength={2}
           placeholder="MM"
           value={month}
           onChange={(e) => setMonth(Number(e.target.value))}
         ></input>
+        <span className={`error ${emptyError ? "show" : "hidden"}`}>
+          This field is required
+        </span>
       </label>
       <label>
         Year
         <input
           className="no-spinners"
           type="number"
-          maxLength={4}
           placeholder="YYYY"
           value={year}
           onChange={(e) => setYear(Number(e.target.value))}
         ></input>
+        <span className={`error ${emptyError ? "show" : "hidden"}`}>
+          This field is required
+        </span>
       </label>
       <button>
         <svg
