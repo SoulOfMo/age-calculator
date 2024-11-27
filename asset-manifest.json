@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/age-calculator/static/css/main.b4c2b935.css",
+    "main.js": "/age-calculator/static/js/main.f7871e82.js",
+    "index.html": "/age-calculator/index.html",
+    "main.b4c2b935.css.map": "/age-calculator/static/css/main.b4c2b935.css.map",
+    "main.f7871e82.js.map": "/age-calculator/static/js/main.f7871e82.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b4c2b935.css",
+    "static/js/main.f7871e82.js"
+  ]
+}
