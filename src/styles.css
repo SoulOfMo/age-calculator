@@ -76,7 +76,6 @@ form {
   padding-bottom: 3rem;
   border-bottom: 2px solid hsl(0, 0%, 86%);
   color: hsl(0, 1%, 44%);
-  overflow: hidden;
 }
 form label {
   display: flex;
