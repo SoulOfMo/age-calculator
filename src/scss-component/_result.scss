@@ -13,4 +13,12 @@
   span {
     color: $purple;
   }
+  @media (max-width: 700px) {
+    font-size: 4rem;
+    & .day,
+    .month,
+    .year {
+      margin-top: -1rem;
+    }
+  }
 }

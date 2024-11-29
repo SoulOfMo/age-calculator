@@ -1,0 +1,9 @@
+<label>
+    Day
+    <input className="no-spinners" type="number" placeholder="DD" value={day} onChange={(e)=>
+    setDay(Number(e.target.value))}
+    ></input>
+    <span className={`error ${emptyError ? "show" : "hidden" }`}>
+        This field is required
+    </span>
+</label>

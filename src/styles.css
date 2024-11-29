@@ -68,13 +68,21 @@ ul {
   padding: 3rem;
   padding-right: 4rem;
 }
+@media (max-width: 700px) {
+  .container {
+    width: 25rem;
+    margin: 1em auto;
+    border-radius: 2rem 2rem 8rem 2rem;
+    padding: 3rem 2rem;
+  }
+}
 
 form {
   display: flex;
   position: relative;
   gap: 2rem;
-  padding-bottom: 3rem;
-  border-bottom: 2px solid hsl(0, 0%, 86%);
+  padding-bottom: 4rem;
+  border-bottom: 1px solid hsl(0, 0%, 86%);
   color: hsl(0, 1%, 44%);
 }
 form label {
@@ -84,11 +92,16 @@ form label {
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   font-weight: 700;
+  max-height: 72px;
+}
+form label.label-error {
+  color: hsl(0, 100%, 67%);
 }
 form input {
-  padding: 1rem 1.5rem;
-  font-size: 2.5rem;
-  font-weight: 700;
+  padding: 1rem 0rem 1rem 1.5rem;
+  margin-top: 0.7rem;
+  font-size: 2rem;
+  font-weight: 800;
   width: 11rem;
   height: 5rem;
   border: 1px solid hsl(0, 0%, 86%);
@@ -103,18 +116,22 @@ form input:is(:active, :focus) {
 form button {
   position: absolute;
   right: 0rem;
-  top: 7rem;
+  top: 8rem;
   border-radius: 50%;
   background-color: hsl(259, 100%, 65%);
   border: none;
+  height: 60px;
+  width: 60px;
   padding: 1rem;
+  display: grid;
+  place-content: center;
 }
 form button:is(:active, :hover) {
   background-color: hsl(0, 0%, 8%);
   cursor: pointer;
 }
 form button svg {
-  width: 50%;
+  width: 80%;
   margin: auto;
 }
 form .error {
@@ -129,6 +146,34 @@ form .error {
 }
 form .show {
   opacity: 100;
+}
+@media (max-width: 700px) {
+  form {
+    gap: 1rem;
+  }
+  form label {
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+  form input {
+    width: 6.5rem;
+    font-size: 1.4rem;
+    padding: 0.3rem 0 0.3rem 1rem;
+    height: 4rem;
+  }
+  form .error {
+    font-size: 0.7rem;
+  }
+  form button {
+    right: 40%;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+  }
+  form button svg {
+    width: 50%;
+    font-weight: 800;
+  }
 }
 
 .results {
@@ -146,6 +191,16 @@ form .show {
 }
 .results span {
   color: hsl(259, 100%, 65%);
+}
+@media (max-width: 700px) {
+  .results {
+    font-size: 4rem;
+  }
+  .results .day,
+  .results .month,
+  .results .year {
+    margin-top: -1rem;
+  }
 }
 
 body {

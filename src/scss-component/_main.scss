@@ -7,4 +7,10 @@
   border-radius: 1rem 1rem 10rem 1rem;
   padding: 3rem;
   padding-right: 4rem;
+  @media (max-width: "700px") {
+    width: 25rem;
+    margin: 1em auto;
+    border-radius: 2rem 2rem 8rem 2rem;
+    padding: 3rem 2rem;
+  }
 }
