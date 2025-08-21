@@ -6,64 +6,62 @@ export default function Form({ onResult }) {
   const [yearInput, setYearInput] = useState("");
   const [monthInput, setMonthInput] = useState("");
   const [dayInput, setDayInput] = useState("");
-  const [err, setErr] = useState(false);
-  const [yearErr, setYearErr] = useState("");
-  const [monthErr, setMonthErr] = useState("");
-  const [dayErr, setDayErr] = useState("");
+  const [errors, setErrors] = useState({
+    dayErr: "",
+    monthErr: "",
+    yearErr: "",
+  });
 
   function handleResultOnErr() {
-    setErr(true);
     onResult("--", "--", "--");
   }
 
   function onFocusInput() {
-    setErr(false);
-    setDayErr("");
-    setMonthErr("");
-    setYearErr("");
+    setErrors({ dayErr: "", monthErr: "", yearErr: "" });
   }
   //Submitting the form
   const handleCheck = function (e) {
     //Preventing Default
     e.preventDefault();
-    setErr(false);
     //getting birthdayInput and setting it to a new date
     const birthDate = new Date(yearInput, monthInput - 1, dayInput);
     //checking for validity of the birthday Date
     if (dayInput === "" && monthInput === "" && yearInput === "") {
-      setDayErr("This field is required");
-      setMonthErr("This field is required");
-      setYearErr("This field is required");
+      setErrors({
+        dayErr: "This field is required",
+        monthErr: "This field is required",
+        yearErr: "This field is required",
+      });
+
       handleResultOnErr();
       return;
     }
 
     if (dayInput === "") {
-      setDayErr("This field is required");
+      setErrors({ ...errors, dayErr: "This field is required" });
       handleResultOnErr();
       return;
     }
 
     if (monthInput === "") {
-      setMonthErr("This field is required");
+      setErrors({ ...errors, monthErr: "This field is required" });
       handleResultOnErr();
       return;
     }
 
     if (monthInput > 12) {
-      setMonthErr("Must be a valid month");
+      setErrors({ ...errors, monthErr: "Must be a valid month" });
       handleResultOnErr();
       return;
     }
 
     if (yearInput === "") {
-      setYearErr("This field is required");
-      setErr(true);
+      setErrors({ ...errors, yearErr: "This field is required" });
       return;
     }
 
     if (birthDate.getDate() !== parseInt(dayInput, 10)) {
-      setDayErr("Must be a valid day");
+      setErrors({ ...errors, dayErr: "Must be a valid day" });
       handleResultOnErr();
       return;
     }
@@ -71,9 +69,8 @@ export default function Form({ onResult }) {
     const currentDate = new Date(); //getting present day date
     if (birthDate > currentDate) {
       // checking if the birthday is greater than the present date
-      setErr(true);
-      setYearErr(`Must be in the past`);
       handleResultOnErr();
+      setErrors({ ...errors, yearErr: `Must be in the past` });
       return;
     }
 
@@ -112,8 +109,7 @@ export default function Form({ onResult }) {
         placeholder={"DD"}
         value={dayInput}
         setValue={setDayInput}
-        error={err}
-        errMsg={dayErr}
+        errMsg={errors.dayErr}
         onFocus={onFocusInput}
       >
         Day
@@ -123,8 +119,7 @@ export default function Form({ onResult }) {
         placeholder={"MM"}
         value={monthInput}
         setValue={setMonthInput}
-        error={err}
-        errMsg={monthErr}
+        errMsg={errors.monthErr}
         onFocus={onFocusInput}
       >
         Month
@@ -134,8 +129,7 @@ export default function Form({ onResult }) {
         placeholder={"YYYY"}
         value={yearInput}
         setValue={setYearInput}
-        error={err}
-        errMsg={yearErr}
+        errMsg={errors.yearErr}
         onFocus={onFocusInput}
       >
         Year
